@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lumen/core/theme/theme.dart';
-import 'package:lumen/presentation/screen/home/home_screen.dart';
+import 'package:lumen/presentation/home/home_screen.dart';
 
-void main() {
+void main() async {
   runApp(Lumen());
 }
 

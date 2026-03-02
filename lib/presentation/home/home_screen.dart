@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lumen/presentation/screen/library/library_screen.dart';
-import 'package:lumen/presentation/widget/layout/topbar/tobar_widget.dart';
+import 'package:lumen/presentation/library/library_screen.dart';
+import 'package:lumen/presentation/shared/layout/topbar/tobar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

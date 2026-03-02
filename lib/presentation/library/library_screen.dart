@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lumen/presentation/screen/library/biblia/bibilia_screen.dart';
-import 'package:lumen/presentation/screen/library/predicacion/predicacion_screen.dart';
-import 'package:lumen/presentation/screen/library/song/song_screen.dart';
-import 'package:lumen/presentation/screen/library/layout/header_widget.dart';
-import 'package:lumen/presentation/screen/library/widget/tabs_widget.dart';
+import 'package:lumen/presentation/library/biblia/bibilia_screen.dart';
+import 'package:lumen/presentation/library/sermon/screens/predicacion_screen.dart';
+import 'package:lumen/presentation/library/song/screens/song_screen.dart';
+import 'package:lumen/presentation/library/layout/header_widget.dart';
+import 'package:lumen/presentation/library/widget/tabs_widget.dart';
 
 const List<Widget> pages = <Widget>[
   SongScreen(),
-  PredicacionScreen(),
   BibiliaScreen(),
+  PredicacionScreen(),
 ];
 
 class LibraryScreen extends StatefulWidget {
