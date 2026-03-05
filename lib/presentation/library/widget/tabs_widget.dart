@@ -14,6 +14,7 @@ class TabsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 45,
+      width: double.infinity,
       decoration: const BoxDecoration(
         color: Color(0xFF222222),
         border: Border(bottom: BorderSide(color: Colors.black26)),

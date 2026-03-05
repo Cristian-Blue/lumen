@@ -5,6 +5,14 @@ class BibiliaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('biblia');
+    return Column(
+      children: [
+        Row(children: [
+
+          ],
+        ),
+        Expanded(child: Text('lore ipsum')),
+      ],
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_resizable_container/flutter_resizable_container.dart';
 import 'package:lumen/presentation/library/library_screen.dart';
 import 'package:lumen/presentation/shared/layout/topbar/tobar_widget.dart';
 
@@ -12,11 +13,28 @@ class HomeScreen extends StatelessWidget {
         children: [
           TopBarWidget(),
           Expanded(
-            child: Row(
+            child: ResizableContainer(
+              direction: Axis.horizontal,
               children: [
-                Expanded(flex: 2, child: LibraryScreen()),
-                Expanded(flex: 5, child: Text('previow')),
-                Expanded(flex: 3, child: Text('Slide')),
+                ResizableChild(
+                  size: ResizableSize.ratio(0.2),
+                  child: LibraryScreen(),
+                ),
+                ResizableChild(
+                  size: ResizableSize.ratio(0.6),
+                  child: ColoredBox(
+                    color: Colors.red,
+                    child: Center(child: Text("Editor")),
+                  ),
+                ),
+
+                ResizableChild(
+                  size: ResizableSize.ratio(0.2),
+                  child: ColoredBox(
+                    color: Colors.green,
+                    child: Center(child: Text("Preview")),
+                  ),
+                ),
               ],
             ),
           ),
