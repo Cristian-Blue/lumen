@@ -9,18 +9,19 @@ class Tables {
 
   static const createVerses = '''
   CREATE TABLE bible_verses (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    version_id TEXT NOT NULL,
-    book INTEGER NOT NULL,
-    chapter INTEGER NOT NULL,
-    verse INTEGER NOT NULL,
-    text TEXT NOT NULL,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      version_id TEXT,
+      book INTEGER,
+      book_abbrev TEXT,
+      chapter INTEGER,
+      verse INTEGER,
+      text TEXT,
     FOREIGN KEY (version_id) REFERENCES bible_versions(id)
   )
   ''';
 
   static const createIndexReference = '''
   CREATE INDEX idx_bible_reference 
-  ON bible_verses(version_id, book, chapter, verse)
+  ON bible_verses(version_id, book_abbrev, book, chapter, verse)
   ''';
 }

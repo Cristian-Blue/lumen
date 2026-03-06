@@ -1,25 +1,10 @@
 class BibleBook {
-  final int id;
-  final String versionId;
-  final String name;
-  final int position;
-  final String testament;
+  String name;
+  String abbrev;
 
-  BibleBook({
-    required this.id,
-    required this.versionId,
-    required this.name,
-    required this.position,
-    required this.testament,
-  });
+  BibleBook({required this.name, required this.abbrev});
 
-  factory BibleBook.fromMap(Map<String, dynamic> json) {
-    return BibleBook(
-      id: json['id'],
-      versionId: json['version_id'],
-      name: json['name'],
-      position: json['position'],
-      testament: json['testament'],
-    );
+  factory BibleBook.fromJson(Map<String, dynamic> json) {
+    return BibleBook(name: json['name'], abbrev: json['abbrev']);
   }
 }

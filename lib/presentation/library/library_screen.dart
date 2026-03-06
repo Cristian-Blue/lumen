@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lumen/presentation/library/biblia/bibilia_screen.dart';
+import 'package:lumen/presentation/library/biblia/screen/bibilia_screen.dart';
 import 'package:lumen/presentation/library/sermon/screens/predicacion_screen.dart';
 import 'package:lumen/presentation/library/song/screens/song_screen.dart';
 import 'package:lumen/presentation/library/layout/header_widget.dart';
