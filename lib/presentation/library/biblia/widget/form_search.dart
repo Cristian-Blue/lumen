@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:lumen/data/models/bible/bible_book.dart';
 import 'package:lumen/data/repositories/bible_repository.dart';
 import 'package:lumen/data/service/database_service.dart';
+import 'package:lumen/presentation/library/biblia/widget/autocomplete_custom.dart';
+import 'package:lumen/presentation/library/biblia/widget/select_custom.dart';
+import 'package:lumen/presentation/library/biblia/widget/text_custom.dart';
 
 class FormSearch extends StatefulWidget {
-  const FormSearch({super.key});
+  final String version;
+  const FormSearch({super.key, required this.version});
 
   @override
   State<FormSearch> createState() => _FormSearchState();
@@ -12,6 +16,11 @@ class FormSearch extends StatefulWidget {
 
 class _FormSearchState extends State<FormSearch> {
   List<BibleBook> books = [];
+  int countChapter = 0;
+
+  String book = '';
+  int chapter = 0;
+  String verse = '';
 
   @override
   void initState() {
@@ -21,56 +30,50 @@ class _FormSearchState extends State<FormSearch> {
 
   Future<void> loadBooks() async {
     final db = await DatabaseService.instance.database;
-
     final repo = BibleRepository(db);
-
-    final result = await repo.getBooks();
+    final result = await repo.getBooks(widget.version);
 
     setState(() {
       books = result;
     });
   }
 
+  void change(int? i) {
+    setState(() {
+      chapter = i ?? 0;
+    });
+  }
+
+  void changeAuto(String select) async {
+    final count = await DatabaseService.instance.database;
+    final repo = BibleRepository(count);
+    final result = await repo.getChaptersCount(widget.version, select);
+    setState(() {
+      book = select;
+      countChapter = result;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: Autocomplete<BibleBook>(
-            displayStringForOption: (book) => book.name,
-
-            optionsBuilder: (TextEditingValue textEditingValue) {
-              if (books.isEmpty) {
-                return const Iterable<BibleBook>.empty();
-              }
-
-              if (textEditingValue.text.isEmpty) {
-                return books;
-              }
-
-              return books.where(
-                (book) => book.name.toLowerCase().contains(
-                  textEditingValue.text.toLowerCase(),
-                ),
-              );
-            },
-
-            fieldViewBuilder:
-                (context, controller, focusNode, onEditingComplete) {
-                  return TextField(
-                    controller: controller,
-                    focusNode: focusNode,
-                    decoration: const InputDecoration(
-                      labelText: "Libro",
-                      border: OutlineInputBorder(),
-                    ),
-                  );
-                },
-
-            onSelected: (BibleBook book) {
-              print("Libro seleccionado: ${book.abbrev}");
-            },
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: AutocompleteCustom(books: books, onChange: changeAuto),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: SelectCustom(
+                text: 'Capitulo',
+                maxChapters: countChapter,
+                onChange: change,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(child: TextCustom(text: 'Versiculo')),
+          ],
         ),
       ],
     );

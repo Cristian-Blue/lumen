@@ -1,12 +1,19 @@
 import 'package:lumen/data/mappers/bible_mappers.dart';
 import 'package:lumen/data/models/bible/bible_book.dart';
 import 'package:lumen/data/models/bible/bible_verse.dart';
+import 'package:lumen/data/models/bible/bible_version.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class BibleRepository {
   final Database db;
 
   BibleRepository(this.db);
+
+  Future<List<BibleVersion>> getVersions() async {
+    final result = await db.query('bible_versions');
+
+    return result.map((e) => BibleVersion.fromMap(e)).toList();
+  }
 
   Future<List<BibleVerse>> getChapter({
     required String version,
@@ -41,12 +48,16 @@ class BibleRepository {
     return BibleVerse.fromMap(result.first);
   }
 
-  Future<List<BibleBook>> getBooks() async {
-    final result = await db.rawQuery('''
+  Future<List<BibleBook>> getBooks(String version) async {
+    final result = await db.rawQuery(
+      '''
       SELECT DISTINCT book, book_abbrev
       FROM bible_verses
+      where version_id = ?
       ORDER BY book
-    ''');
+    ''',
+      [version],
+    );
 
     return result.map((e) {
       return BibleBook(
@@ -54,5 +65,21 @@ class BibleRepository {
         abbrev: e['book_abbrev'] as String,
       );
     }).toList();
+  }
+
+  Future<int> getChaptersCount(version, book) async {
+    final result = await db.rawQuery(
+      '''
+    SELECT COUNT(DISTINCT chapter) AS chapters
+    FROM bible_verses
+    WHERE book_abbrev = ?
+    AND version_id = ?
+    ''',
+      [book, version],
+    );
+
+    if (result.isEmpty) return 0;
+
+    return result.first['chapters'] as int;
   }
 }
