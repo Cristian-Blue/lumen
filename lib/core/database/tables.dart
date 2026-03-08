@@ -24,4 +24,27 @@ class Tables {
   CREATE INDEX idx_bible_reference 
   ON bible_verses(version_id, book_abbrev, book, chapter, verse)
   ''';
+
+  static const createSong = '''
+    CREATE TABLE songs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL,
+      author TEXT,
+      album TEXT,
+      year INTEGER,
+      ccli TEXT,
+      created_at TEXT
+    )
+  ''';
+
+  static const createSongSlide = '''
+    CREATE TABLE song_slides (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      song_id INTEGER,
+      position INTEGER,
+      content TEXT,
+      type TEXT,
+      FOREIGN KEY(song_id) REFERENCES songs(id)
+    )
+  ''';
 }
