@@ -38,24 +38,29 @@ class _FormSearchState extends State<FormSearch> {
     setState(() {
       books = result;
     });
-    widget.onChange?.call(book, chapter, verse);
+    widget.onChange.call(book, chapter, verse);
   }
 
   void change(int? i) {
     setState(() {
       chapter = i ?? 0;
     });
-    widget.onChange?.call(book, chapter, verse);
+    widget.onChange.call(book, chapter, verse);
   }
 
   void changeAuto(String select) async {
-    final count = await DatabaseService.instance.database;
-    final repo = BibleRepository(count);
+    final db = await DatabaseService.instance.database;
+    final repo = BibleRepository(db);
     final result = await repo.getChaptersCount(widget.version, select);
+
     setState(() {
       book = select;
       countChapter = result;
+      chapter = 1;
+      verse = '';
     });
+
+    widget.onChange(book, chapter, verse);
   }
 
   @override
@@ -72,6 +77,7 @@ class _FormSearchState extends State<FormSearch> {
               child: SelectCustom(
                 text: 'Capitulo',
                 maxChapters: countChapter,
+                value: chapter == 0 ? null : chapter,
                 onChange: change,
               ),
             ),

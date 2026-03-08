@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class SelectCustom extends StatefulWidget {
+class SelectCustom extends StatelessWidget {
   final int maxChapters;
+  final int? value;
   final String text;
   final void Function(int?) onChange;
 
@@ -10,28 +11,23 @@ class SelectCustom extends StatefulWidget {
     required this.maxChapters,
     required this.text,
     required this.onChange,
+    required this.value,
   });
 
   @override
-  State<SelectCustom> createState() => _SelectCustomState();
-}
-
-class _SelectCustomState extends State<SelectCustom> {
-  @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<int>(
+      value: value,
       decoration: InputDecoration(
-        labelText: widget.text,
+        labelText: text,
         border: OutlineInputBorder(),
       ),
       items: List.generate(
-        widget.maxChapters,
+        maxChapters,
         (index) =>
             DropdownMenuItem(value: index + 1, child: Text("${index + 1}")),
       ),
-      onChanged: (value) {
-        widget.onChange(value);
-      },
+      onChanged: onChange,
     );
   }
 }

@@ -32,16 +32,28 @@ class AutocompleteCustom extends StatelessWidget {
         );
       },
 
-      fieldViewBuilder: (context, controller, focusNode, onEditingComplete) {
-        return TextField(
-          controller: controller,
-          focusNode: focusNode,
-          decoration: const InputDecoration(
-            labelText: "Libro",
-            border: OutlineInputBorder(),
-          ),
-        );
-      },
+      fieldViewBuilder:
+          (
+            BuildContext context,
+            TextEditingController controller,
+            FocusNode focusNode,
+            VoidCallback onEditingComplete,
+          ) {
+            return TextField(
+              controller: controller,
+              focusNode: focusNode,
+
+              /// 👇 limpia el campo cuando se hace click
+              onTap: () {
+                controller.clear();
+              },
+
+              decoration: const InputDecoration(
+                labelText: "Libro",
+                border: OutlineInputBorder(),
+              ),
+            );
+          },
 
       onSelected: (BibleBook book) {
         onChange(book.abbrev);
