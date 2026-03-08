@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-const Color _customColor = Color(0xff49149f);
-
 const List<Color> _colorThemes = [
-  _customColor,
+  Color.fromARGB(255, 22, 31, 169),
   Colors.blue,
   Colors.red,
   Colors.yellow,
@@ -31,6 +29,14 @@ class AppTheme {
         centerTitle: false,
       ),
       brightness: Brightness.dark,
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Colors.grey.shade100,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+      ),
     );
   }
 }

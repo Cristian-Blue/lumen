@@ -30,7 +30,7 @@ class BibleRepository {
     return result.map((e) => BibleVerse.fromMap(e)).toList();
   }
 
-  Future<BibleVerse?> getVerse({
+  Future<List<BibleVerse>> getVerse({
     required String version,
     required String book,
     required int chapter,
@@ -40,12 +40,11 @@ class BibleRepository {
       'bible_verses',
       where: 'version_id=? AND book_abbrev=? AND chapter=? AND verse=?',
       whereArgs: [version, book, chapter, verse],
-      limit: 1,
     );
 
-    if (result.isEmpty) return null;
+    if (result.isEmpty) return [];
 
-    return BibleVerse.fromMap(result.first);
+    return result.map((e) => BibleVerse.fromMap(e)).toList();
   }
 
   Future<List<BibleBook>> getBooks(String version) async {

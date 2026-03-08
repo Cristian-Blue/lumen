@@ -8,7 +8,9 @@ import 'package:lumen/presentation/library/biblia/widget/text_custom.dart';
 
 class FormSearch extends StatefulWidget {
   final String version;
-  const FormSearch({super.key, required this.version});
+  final Function(String, int, String) onChange;
+
+  const FormSearch({super.key, required this.version, required this.onChange});
 
   @override
   State<FormSearch> createState() => _FormSearchState();
@@ -36,12 +38,14 @@ class _FormSearchState extends State<FormSearch> {
     setState(() {
       books = result;
     });
+    widget.onChange?.call(book, chapter, verse);
   }
 
   void change(int? i) {
     setState(() {
       chapter = i ?? 0;
     });
+    widget.onChange?.call(book, chapter, verse);
   }
 
   void changeAuto(String select) async {

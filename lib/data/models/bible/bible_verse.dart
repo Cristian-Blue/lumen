@@ -1,6 +1,6 @@
 class BibleVerse {
   final int id;
-  final int versionId;
+  final String versionId;
   final int book;
   final String bookAbbrev;
   final int chapter;

@@ -30,7 +30,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(Colors.blue.value),
       child: Column(
         children: [
           HeaderWidget(),
