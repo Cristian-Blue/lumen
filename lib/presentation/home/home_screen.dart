@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_resizable_container/flutter_resizable_container.dart';
+import 'package:lumen/presentation/editor/editor_screen.dart';
 import 'package:lumen/presentation/library/library_screen.dart';
 import 'package:lumen/presentation/shared/layout/topbar/tobar_widget.dart';
 
@@ -22,10 +23,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 ResizableChild(
                   size: ResizableSize.ratio(0.6),
-                  child: ColoredBox(
-                    color: Colors.red,
-                    child: Center(child: Text("Editor")),
-                  ),
+                  child: EditorScreen(),
                 ),
 
                 ResizableChild(

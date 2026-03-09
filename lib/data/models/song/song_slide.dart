@@ -15,11 +15,11 @@ class SongSlide {
 
   factory SongSlide.fromMap(Map<String, dynamic> map) {
     return SongSlide(
-      id: map['id'],
-      songId: map['song_id'],
-      position: map['position'],
-      content: map['content'],
-      type: map['type'],
+      id: map['id'] ?? 0,
+      songId: map['song_id'] ?? 0,
+      position: map['position'] ?? 0,
+      content: map['content'] ?? '',
+      type: map['type'] ?? '',
     );
   }
 }

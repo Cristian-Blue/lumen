@@ -1,6 +1,6 @@
 class Tables {
   static const createVersions = '''
-  CREATE TABLE bible_versions (
+  CREATE TABLE  IF NOT EXISTS bible_versions (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     language TEXT NOT NULL
@@ -8,7 +8,7 @@ class Tables {
   ''';
 
   static const createVerses = '''
-  CREATE TABLE bible_verses (
+  CREATE TABLE  IF NOT EXISTS bible_verses (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       version_id TEXT,
       book INTEGER,
@@ -21,12 +21,12 @@ class Tables {
   ''';
 
   static const createIndexReference = '''
-  CREATE INDEX idx_bible_reference 
+  CREATE INDEX IF NOT EXISTS idx_bible_reference 
   ON bible_verses(version_id, book_abbrev, book, chapter, verse)
   ''';
 
   static const createSong = '''
-    CREATE TABLE songs (
+    CREATE TABLE  IF NOT EXISTS songs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL,
       author TEXT,
@@ -38,13 +38,17 @@ class Tables {
   ''';
 
   static const createSongSlide = '''
-    CREATE TABLE song_slides (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      song_id INTEGER,
-      position INTEGER,
-      content TEXT,
-      type TEXT,
-      FOREIGN KEY(song_id) REFERENCES songs(id)
-    )
+  CREATE TABLE IF NOT EXISTS song_slides (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    song_id INTEGER NOT NULL,
+    position INTEGER NOT NULL,
+    content TEXT,
+    type TEXT,
+    FOREIGN KEY(song_id) REFERENCES songs(id)
+  )
   ''';
+  static const createSongSlidesIndex = '''
+CREATE INDEX IF NOT EXISTS idx_song_slides_song_id
+ON song_slides(song_id, position)
+''';
 }

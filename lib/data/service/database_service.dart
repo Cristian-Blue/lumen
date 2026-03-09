@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:lumen/core/database/tables.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -22,8 +23,6 @@ class DatabaseService {
 
     final path = join(dbPath, "bible.db");
 
-    print("DB PATH -> $path");
-
     // copiar la BD desde assets si no existe
     if (!await File(path).exists()) {
       final data = await rootBundle.load("assets/database/bible.db");
@@ -33,7 +32,19 @@ class DatabaseService {
     }
 
     _database = await factory.openDatabase(path);
+    await _createTables(_database!);
 
     return _database!;
+  }
+
+  Future<void> _createTables(Database db) async {
+    await db.transaction((txn) async {
+      await txn.execute(Tables.createVersions);
+      await txn.execute(Tables.createVerses);
+      await txn.execute(Tables.createIndexReference);
+      await txn.execute(Tables.createSong);
+      await txn.execute(Tables.createSongSlide);
+      await txn.execute(Tables.createSongSlidesIndex);
+    });
   }
 }
