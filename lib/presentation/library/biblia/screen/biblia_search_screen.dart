@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lumen/data/models/bible/bible_verse.dart';
-import 'package:lumen/data/repositories/bible_repository.dart';
+import 'package:lumen/data/repositories/bible/bible_repository.dart';
 import 'package:lumen/data/service/database_service.dart';
 import 'package:lumen/presentation/library/biblia/widget/form_search.dart';
 

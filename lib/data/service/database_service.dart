@@ -45,6 +45,9 @@ class DatabaseService {
       await txn.execute(Tables.createSong);
       await txn.execute(Tables.createSongSlide);
       await txn.execute(Tables.createSongSlidesIndex);
+      await txn.execute(Tables.createSermons);
+      await txn.execute(Tables.createSermonSlide);
+      await txn.execute(Tables.createSermonSlidesIndex);
     });
   }
 }

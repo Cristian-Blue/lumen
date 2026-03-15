@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lumen/data/repositories/song_repository.dart';
+import 'package:lumen/data/repositories/song/song_repository.dart';
 import 'package:lumen/data/service/database_service.dart';
 
 class SongEditor extends StatefulWidget {

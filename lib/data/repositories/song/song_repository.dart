@@ -11,7 +11,11 @@ class SongRepository {
     return result.map((e) => SongModel.fromMap(e)).toList();
   }
 
-  Future<void> deleteSong() async {}
+  Future<bool> deleteSong(int id) async {
+    final result = await db.delete('songs', where: 'id = ?', whereArgs: [id]);
+    if (result == 0) return false;
+    return true;
+  }
 
   Future<void> updateSong() async {}
 

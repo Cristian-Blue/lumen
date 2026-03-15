@@ -48,7 +48,34 @@ class Tables {
   )
   ''';
   static const createSongSlidesIndex = '''
-CREATE INDEX IF NOT EXISTS idx_song_slides_song_id
-ON song_slides(song_id, position)
-''';
+    CREATE INDEX IF NOT EXISTS idx_song_slides_song_id
+    ON song_slides(song_id, position)
+  ''';
+
+  static const createSermons = '''
+    CREATE TABLE IF NOT EXISTS sermons (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        author TEXT,
+        description TEXT,
+        tag TEXT,
+        date TEXT,
+    )
+  ''';
+
+  static const createSermonSlide = '''
+    CREATE TABLE IF NOT EXISTS sermon_slides (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      sermon_id INTEGER NOT NULL,
+      position INTEGER NOT NULL,
+      content TEXT,
+      type TEXT,
+      FOREIGN KEY(sermon_id) REFERENCES sermons(id) 
+    )
+  ''';
+
+  static const createSermonSlidesIndex = '''
+    CREATE INDEX IF NOT EXISTS idx_sermon_slides_sermon_id
+    ON sermon_slides(sermon_id, position)
+  ''';
 }
