@@ -5,6 +5,7 @@ class SermonModel {
   final String date;
   final List<String> tags;
   final String description;
+
   SermonModel(
     this.id,
     this.title,
@@ -15,13 +16,26 @@ class SermonModel {
   );
 
   factory SermonModel.fromJson(Map<String, dynamic> json) {
+    // 🔥 Manejo seguro de tags
+    List<String> parsedTags = [];
+
+    if (json['tags'] is String) {
+      parsedTags = (json['tags'] as String)
+          .split(',')
+          .map((e) => e.trim())
+          .where((e) => e.isNotEmpty)
+          .toList();
+    } else if (json['tags'] is List) {
+      parsedTags = List<String>.from(json['tags']);
+    }
+
     return SermonModel(
-      json['id'],
-      json['title'],
-      json['author'],
-      json['date'],
-      json['tags'],
-      json['description'],
+      json['id'] ?? 0,
+      json['title'] ?? '',
+      json['author'] ?? '',
+      json['date'] ?? '',
+      parsedTags,
+      json['description'] ?? '',
     );
   }
 }

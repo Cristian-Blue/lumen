@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lumen/domain/models/sermon/sermon_model.dart';
+import 'package:lumen/data/models/sermon/sermon_model.dart';
 
 class CardWidget extends StatelessWidget {
   final SermonModel sermon;
@@ -26,6 +26,7 @@ class CardWidget extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         sermon.title,
@@ -33,11 +34,11 @@ class CardWidget extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        sermon.preacher,
+                        sermon.author,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       Text(
-                        "${sermon.date.day}/${sermon.date.month}/${sermon.date.year}",
+                        sermon.date,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],

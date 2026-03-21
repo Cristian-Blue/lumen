@@ -57,9 +57,8 @@ class Tables {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
         author TEXT,
-        description TEXT,
-        tag TEXT,
-        date TEXT,
+        tags TEXT,
+        date TEXT
     )
   ''';
 

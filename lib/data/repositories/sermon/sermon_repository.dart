@@ -22,16 +22,14 @@ class SermonRepository {
     String title,
     String author,
     String date,
-    List<String> tags,
-    String description,
+    String tags,
     List<String> slides,
   ) async {
     final result = await db.insert('sermons', {
       'title': title,
       'author': author,
       'date': date,
-      'tags': tags,
-      'description': description,
+      'tag': tags,
     });
     if (result == 0) return false;
     for (int i = 0; i < slides.length; i++) {

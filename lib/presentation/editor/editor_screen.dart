@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lumen/presentation/editor/widget/sermon_editor.dart';
 import 'package:lumen/presentation/editor/widget/song_editor.dart';
 
 class EditorScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class EditorScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
-      children: [Expanded(child: SongEditor())],
+      children: [Expanded(child: SermonEditor())],
     );
   }
 }
