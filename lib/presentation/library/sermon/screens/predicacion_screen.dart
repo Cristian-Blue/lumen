@@ -20,7 +20,7 @@ class _PredicacionScreenState extends State<PredicacionScreen> {
     sermonFuture = searchAllSong();
   }
 
-  void reloadSongs() {
+  void reloadSermons() {
     setState(() {
       sermonFuture = searchAllSong();
     });
@@ -43,12 +43,12 @@ class _PredicacionScreenState extends State<PredicacionScreen> {
           width: double.infinity,
           child: FilledButton(
             onPressed: () {},
-            child: const Text('Agregar cancion'),
             style: FilledButton.styleFrom(
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.zero, // Esquinas cuadradas
               ),
             ),
+            child: const Text('Agregar Predicacion'),
           ),
         ),
         Expanded(
@@ -71,7 +71,7 @@ class _PredicacionScreenState extends State<PredicacionScreen> {
               return ListView.builder(
                 itemCount: sermons.length,
                 itemBuilder: (context, index) =>
-                    CardWidget(sermon: sermons[index]),
+                    CardWidget(sermon: sermons[index], onDelete: reloadSermons),
               );
             },
           ),
